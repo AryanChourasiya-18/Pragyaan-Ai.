@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-ink text-parchment font-body antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+  :focus-visible {
+    outline: 2px solid theme('colors.marigold.DEFAULT');
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-ink-surface border border-ink-border rounded-2xl;
+  }
+  .btn-primary {
+    @apply bg-marigold text-ink font-semibold px-5 py-2.5 rounded-xl
+           hover:bg-marigold-soft transition-colors duration-150
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply border border-ink-border text-parchment px-5 py-2.5 rounded-xl
+           hover:border-marigold hover:text-marigold transition-colors duration-150;
+  }
+  .input {
+    @apply bg-ink border border-ink-border rounded-xl px-4 py-2.5 text-parchment
+           placeholder:text-muted focus:border-marigold outline-none transition-colors;
+  }
+  .eyebrow {
+    @apply text-marigold text-xs tracking-[0.2em] uppercase font-semibold;
+  }
+  .jali-divider {
+    @apply h-px w-full bg-ink-border relative;
+  }
+}

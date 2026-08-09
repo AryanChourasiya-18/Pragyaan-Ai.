@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pragyaan
+      POSTGRES_PASSWORD: pragyaan
+      POSTGRES_DB: pragyaan
+    ports:
+      - "5432:5432"
+    volumes:
+      - pragyaan_pgdata:/var/lib/postgresql/data
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://pragyaan:pragyaan@db:5432/pragyaan
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+      - pragyaan_storage:/app/storage
+      - pragyaan_chroma:/app/chroma_data
+
+volumes:
+  pragyaan_pgdata:
+  pragyaan_storage:
+  pragyaan_chroma:
